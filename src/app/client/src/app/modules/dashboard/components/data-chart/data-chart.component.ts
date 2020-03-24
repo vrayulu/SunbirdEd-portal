@@ -25,6 +25,7 @@ export class DataChartComponent implements OnInit, OnDestroy {
 
   @Input() chartInfo: any;
   @Input() telemetryInteractObject: IInteractEventObject;
+  @Input() hideElements = false;
   public unsubscribe = new Subject<void>();
   // contains the chart configuration
   chartConfig;
@@ -78,6 +79,8 @@ export class DataChartComponent implements OnInit, OnDestroy {
   };
 
   @ViewChild(BaseChartDirective) chartDirective: BaseChartDirective;
+  @ViewChild('chartRootElement') chartRootElement;
+  @ViewChild('chartCanvas') chartCanvas;
   constructor(public resourceService: ResourceService, private fb: FormBuilder,
     private toasterService: ToasterService, private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer,
     private usageService: UsageService) {
