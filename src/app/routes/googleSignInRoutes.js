@@ -73,6 +73,8 @@ module.exports = (app) => {
       redirectUrl = reqQuery.redirect_uri.replace(KEYCLOACK_AUTH_CALLBACK_STRING, ''); // to avoid 401 auth errors from keycloak
       if (reqQuery.client_id === 'android') {
         redirectUrl = reqQuery.redirect_uri.split('?')[0] + getQueryParams(keyCloakToken);
+      } else if (reqQuery.client_id === 'nodebb-local' || reqQuery.client_id === 'nodebb') {
+        redirectUrl = reqQuery.redirect_uri.split('?')[0] + getQueryParams(keyCloakToken);
       }
       logger.info({msg: 'redirect url ' + redirectUrl});
       logger.info({msg:'google sign in success',additionalInfo: {googleProfile, isUserExist, newUserDetails, redirectUrl}});
